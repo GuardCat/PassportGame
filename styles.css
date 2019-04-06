@@ -1,0 +1,191 @@
+body {
+	background-color:  	white;
+}
+
+#passportContainer {
+	position:			relative;
+	top: 				0px;
+	left: 				0px;
+}
+
+#passport {
+	z-index:			1;
+	position: 			absolute;
+	top:				0px;
+	left:				0px;
+	height:				640px;
+	box-shadow:  		0 0 10px rgb(100, 100, 100);	
+	border-radius:  	10px;
+}
+
+#photo {
+	z-index:			0;
+	position:			absolute;
+	top:				380px;
+	left:				20px;
+	width:				130px;
+}
+
+.passportText {
+	z-index:			2;
+	position:			absolute;
+	font-family:		"lucida console";
+	color:				rgb(70,70,70);
+	text-transform:		uppercase;
+}
+.rightBlock {
+	background-color:  	rgb(226, 240, 226);
+	width: 				420px;
+	height:				630px;
+	margin-left:		465px;
+	color:				black;
+	font-family:		sans-serif;
+	font-weight:		normal;
+	border-radius:  	10px;
+	padding:  			0px 10px 10px 10px;
+	box-shadow:  		0 0 10px rgb(100, 100, 100);	
+}
+
+#informationContainer {
+	display:  			flex;
+	flex-direction: 	row;
+	justify-content:  	space-between;
+	margin-top: 		0px;
+}
+
+
+h3 {
+	font-size:			28px; 
+	border-radius:  	10px;
+	border:  			2px solid rgb(100, 100, 100);
+	padding:  			10px ;
+	vertical-align: 	middle;
+	color:  			rgb(20, 20, 20);
+	font-weight:  		normal;
+	text-align:  		center; 
+}
+
+input[type='button'] {
+	background-color:	rgb(0, 106,76);
+	border:  			0px;
+	border-radius:  	10px;
+	padding:  			10px;
+	color:  			white;
+	font-size: 			14px;
+	box-shadow:  		0 0 10px rgb(100, 100, 100);
+	outline:  			0;
+}
+
+input[type='button']:active {
+	box-shadow:  		0 0 0px;	
+}
+
+.error {
+	border:				2px solid red !important;
+}
+
+.good {
+	border:				4px solid green !important;
+}
+
+
+.hide {
+	display: 			none !important;
+}
+
+.disabled {
+	background-color:	silver !important;
+}
+
+#points {
+	letter-spacing:  	0.1em;
+	color:  			rgb(20, 40, 20);
+}
+
+
+.formTable {
+	padding-top:  		0px;
+}
+
+.formTable .label {
+	font-size:			18px;
+	text-align: 		right;
+}
+.formTable  td, th{
+	padding:			10px;
+}
+.formTable input[type=text]	{
+	border-radius:		6px;
+	border: 			solid 2px rgb(100, 100, 100);
+	height: 			40px;
+	box-sizing: 		content-box;
+	font-size: 			18px;
+	text-transform:		uppercase;
+	padding:  			0px 0px 0px 5px;
+}
+
+#sexInput {
+	border-radius:		6px;
+	padding:  			5px 0 0 5px;
+}
+
+
+/* Passport block*/
+#whoGave {
+	top:			90px;
+	left:			40px;
+}
+#rDate {
+	top:			136px;
+	left:			85px;
+}
+#code {
+	top:			136px;
+	left:			290px;
+}
+
+#surname {
+	top:			355px;
+	left:			220px;
+}
+#name {
+	top:			402px;
+	left:			220px;
+}
+#lastname {
+	top:			427px;
+	left:			220px;
+}
+
+#sex {
+	top:			450px;
+	left:			180px;
+}
+#birthDate {
+	top:			450px;
+	left:			270px;
+}
+#birthCity {
+	top:			475px;
+	left:			220px;
+}
+
+.passNumber {
+	transform:		rotate(90deg);
+	-ms-transform:	rotate(90deg); 
+	-ms-filter: 	progid:DXImageTransform.Microsoft.Matrix(M11=3.061616997868383e-16, M12=-1, M21=1, M22=3.061616997868383e-16, SizingMethod='auto expand');
+	filter:			progid:DXImageTransform.Microsoft.Matrix(M11=3.061616997868383e-16, M12=-1, M21=1, M22=3.061616997868383e-16, SizingMethod='auto expand');
+    font-family:	"times new roman";
+	font-size:		19px;
+	letter-spacing:	2px;
+	color:			maroon;
+	left: 			378px;
+}
+
+#upNumber {
+	top:			140px;
+}
+
+#downNumber {
+	top:			450px;
+}

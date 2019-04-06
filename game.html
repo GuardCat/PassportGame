@@ -1,0 +1,321 @@
+<!doctype HTML>
+<html>
+<head>
+	<link rel = "stylesheet" href = "" id = "mainstyle"></link>
+	<link rel = "stylesheet" href = "" id = "messagesstyle"></link>
+	<meta charset="utf-8">
+</head>
+
+<body>
+	<div id = "passportContainer">
+		<img src = "." id = "passport">
+		<img src = "." id = "photo">
+	
+		<div class = "passportText passNumber" id = "upNumber"	>3625 745252</div>
+		<div class = "passportText passNumber" id = "downNumber">3625 745252</div>
+		
+		<div class = "passportText" id = "whoGave"				>ОВД М-ского района Мценской области</div>
+		<div class = "passportText" id = "rDate"				>25.01.2014</div>
+		<div class = "passportText" id = "code"					>096–032</div>
+		
+		
+		<div class = "passportText" id = "surname"				>Хоботов</div>
+		<div class = "passportText" id = "name"					>Герман</div>
+		<div class = "passportText" id = "lastname"				>Остапович</div>
+		
+		<div class = "passportText"	id = "sex"					>МУЖ.</div>
+		<div class = "passportText" id = "birthDate"			>22.01.1984</div>
+		
+		<div class = "passportText" id = "birthCity"			>гор. куйбышев</div>
+	</div>
+
+	<div class="rightBlock">
+		<div id = "informationContainer">
+			<h3 id = "counter">ЗАЯВКА № 0</h3>
+			<h3 id = "points">0000</h3>
+			<h3 id = "time" class = "hide">10:00</h3>
+		</div>
+		
+		<div id = "informationContainer">
+			<input type = "button" value = "Сохр. и далее" id = "next">
+			<input type = "button" value = "Брак по полу" class = "hide">
+			<input type = "button" value = "Брак по сроку замены" class = "hide">
+		</div>
+		
+		<table class = "formTable">
+			<tr>
+				<td class = "label">Серия и номер паспорта</td>
+				<td> <input type = "text" id = "upNumberInput" placeholder = "____ ______" tabindex = "1"> </td>
+			</tr>
+			<tr>
+				<td class = "label">Когда выдан паспорт</td>
+				<td> <input type = "text" id = "rDateInput" placeholder = "дд.мм.гггг" tabindex = "2"> </td>
+			</tr>
+			<tr>
+				<td class = "label">Фамилия</td>
+				<td> <input type = "text" id = "surnameInput" value = "" tabindex = "3"></td>
+			</tr>
+			<tr>
+				<td class = "label">Имя</td>
+				<td> <input type = "text" id = "nameInput" tabindex = "4"></td>
+			</tr>
+			<tr>
+				<td class = "label">Отчество</td>
+				<td><input type = "text" id = "lastnameInput" tabindex = "5"> </td>
+			</tr>
+			<tr>	
+				<td class = "label">Пол</td>
+				<td> <div id = "sexInput"><label><input type = "radio" value = "ЖЕН." name = "sexInput" tabindex = "6"> Ж</label> <label><input type = "radio" value = "МУЖ." name = "sexInput"  tabindex = "7"> М</label></div></td>
+			<tr>
+				<td class = "label">Дата рождения</td>
+				<td> <input type = "text" id = "birthDateInput" placeholder = "дд.мм.гггг"  tabindex = "8"> </td>
+			</tr>
+		</table>
+	</div>
+
+<script type="text/javascript" href = "" id = "mask"></script>
+<script type="text/javascript" href = "" id = "observer"></script>
+<script type="text/javascript" href = "" id = "passportGame"></script>
+<script type="text/javascript">
+
+const 
+	data = {
+		load: {
+			passport:   {attribute: "src",		value: "img/passport3.png", loadControl: true},
+			photo:      {attribute: "src",		value: "img/photos/noPhoto.jpg"},
+			mainstyle:	{attribute: "href",		value: "styles.css", loadControl: true},
+			mask:		{attribute: "src",		value: "js/mask.js", loadControl: true},
+			observer:	{attribute: "src",		value: "js/observer.js", loadControl: true},
+			passportGame: {attribute: "src",	value: "js/passport.js", loadControl: true},
+			messagesstyle: {attribute: "href",	value: "messages.css"}
+		},
+		menPhotos: [
+			"img/photos/men/1.jpg",
+			"img/photos/men/2.jpg",
+			"img/photos/men/3.jpg",
+			"img/photos/men/4.jpg",
+			"img/photos/men/5.jpg",
+			"img/photos/men/6.jpg",
+			"img/photos/men/7.jpg",
+			"img/photos/men/8.jpg",
+			"img/photos/men/9.jpg",
+			"img/photos/men/10.jpg"
+		],
+		womenPhotos: [
+			"img/photos/women/1.jpg",
+			"img/photos/women/2.jpg",
+			"img/photos/women/3.jpg",
+			"img/photos/women/4.jpg",
+			"img/photos/women/5.jpg",
+			"img/photos/women/6.jpg",
+			"img/photos/women/7.jpg",
+			"img/photos/women/8.jpg",
+			"img/photos/women/9.jpg",
+			"img/photos/women/10.jpg",
+		],
+		heroes: {
+			man_dislike:	"img/heroes/man_dislike.png",
+			man_like:		"img/heroes/man_like.png",
+			man_angry:		"img/heroes/man_angry.png",
+			man_hurry:		"img/heroes/man_hurry.png",
+			woman_ok:		"img/heroes/woman_ok.png",
+			woman_happy:	"img/heroes/woman_happy.png",
+			man_surprised:	"img/heroes/man_surprised.png"
+		},
+
+		
+		gameSettings: {
+			target: 	500
+		},
+		
+		messages: {
+			rules: `<span style = "color: green; font-weight: bold; font-size: 20px;">+100</span> за каждого клиента<br>
+			<span style = "color: red; font-weight: bold; font-size: 20px;">-15</span> за каждую ошибку<br>
+			<span style = "color: green; font-weight: bold; font-size: 20px;">500</span> баллов приносят победу!<br>
+			В минус уйти нельзя, и это радует =)`,
+			error: `Проверяйте данные после ввода! <br>Исправьте ошибки, <b>клиент ждёт</b>, ПОТОРОПИТЕСЬ!`,
+			error_again: `Ещё раз теряете 15 очков за каждый недочёт! <br> Исправьте отмеченные поля, клиент ждёт, <b>поторопитесь</b>!`,
+			win:	`Ты супер!!! Цель достигнута, кликни, чтобы двигаться дальше!`,
+			ctrlv: `Из паспорта копировать невозможно. Не перешли мы ещё на электронные паспорта.`
+		},
+	},
+	
+	loadControl = ( function (loadElems) {
+		var count = 0;	
+		return function() {
+			if (++count === loadElems) {
+				director();
+			}
+
+		};
+	} )( ((obj) => {let res = 0; for( let key in obj ) res = obj[key].loadControl ? res + 1 : res; return res;})(data.load) )
+; 
+
+
+function loadData(obj){
+	let el, attribute;
+	obj = obj.value ? obj.value : obj;
+	for (let key in obj) {
+		el = document.getElementById(key);
+		if (!el) throw new Error(`Wrong id for load: ${key}`);
+		attribute = obj[key].attribute || "innerText";
+		el[ attribute ] = obj[key].value;
+		if(obj[key].loadControl) el.addEventListener("load", loadControl, false);
+	}
+}
+
+class TextChanger {
+	constructor( args = {element: null, attribute: "", prefix: "", postfix: ""}) {
+		Object.assign(this, args);	
+		this.count = 0;
+	}
+	change(text = "", args = {prefix:"", postfix:""}) {
+		this.count++;
+		text = String(text) || String(this.count);
+		this.element[this.attribute] = (args.prefix || this.prefix || "") + text + (args.postfix || this.postfix|| "");
+	}
+}
+
+
+/*
+	@todo добавить размещение сообщений стеком реально (например слоями на экране) или виртуально (массив) и возможность вставлять кнопки.
+*/
+function message(type, caption, text, imgSrc, handler) {
+	let mask = document.createElement("div"), oldMsg = document.querySelector(".msgMask");
+	
+	mask.innerHTML = `
+	<div class = "msgMask">
+		<table class = "msg ${type}">
+			<tr>
+				<td rowspan = "3">
+					<img class = "msgImg" src = "${imgSrc}">
+				</td>
+			</tr>
+			<tr>
+				<td class = "msgCaption">
+				   ${caption}
+				</td>
+			</tr>
+			<tr>
+				<td class = "msgBody">
+				   ${text}
+				</td>
+			</tr>
+		</table>
+	</div>
+	`;
+	document.body.appendChild(mask);
+	mask.addEventListener("click", (e) => {
+		if(handler) handler( );
+		document.getElementsByClassName("msgMask")[0].remove()},
+	false);
+};
+
+function director() {
+	let 
+		dateTemplate = [ /[0-3]/, /[0-9]/, ".", /[0-1]/, /[0-9]/, ".", /[1-2]/, /[9,0]/, /[0-9]/, /[0-9]/ ],
+		birthDayMask = new Mask(document.getElementById("birthDateInput"), dateTemplate),
+		rDateMask = new Mask(document.getElementById("rDateInput"), dateTemplate),
+		numbermask = new Mask(document.getElementById("upNumberInput"), [ /\d/, /\d/, /\d/, /\d/, " ", /\d/, /\d/, /\d/, /\d/, /\d/, /\d/ ]),
+		passportGame = new PassportGame({points: 0, menPhotos: data.menPhotos, womenPhotos: data.womenPhotos, pointsTarget: data.gameSettings.target}),
+		passportObserver = new Observer(passportGame),
+		changePoints = new TextChanger({element: document.getElementById("points"), attribute: "innerText"}),
+		changeCounter = new TextChanger({element: document.getElementById("counter"), attribute: "innerText", prefix: "Заявка № "}),
+
+		pointsDecorator = (e) => {
+			changePoints.change( e.target.toLen(e.target.points, 4) );
+		},
+
+		countDecorator = (e) => {
+			changeCounter.change();
+		},
+
+		dialogMaster = ( ) => {
+			var firstErrorFlag = true, firstNoError = true;
+		
+			return (e) => {
+
+				if(e.target.firstCircle) {
+					if(e.type === "hasErrors" && firstErrorFlag) {
+						firstErrorFlag = false;
+						message("msgError", "ЕСТЬ ОШИБКИ!", data.messages.error, data.heroes.man_dislike);
+					} else if (e.type === "noErrors" && firstNoError) {
+						firstNoError = false;
+						message("", "ОТЛИЧНО!", "Анкета забита без ошибок, так держать!", data.heroes.man_like);
+					}
+				} else {
+					if(e.type === "hasErrors") {
+						message("msgError", "СНОВА ОШИБКИ!", data.messages.error_again, data.heroes.man_angry);
+					} 
+				}
+			};
+		}
+	;
+	
+	window.localStorage.setItem("points", "0");
+	window.localStorage.setItem("passports", "0");
+	
+	passportObserver.subscribe("generated", loadData);
+	passportObserver.subscribe("generated",	pointsDecorator);
+	passportObserver.subscribe("generated",	countDecorator);
+	
+	passportObserver.subscribe("hasErrors", pointsDecorator);
+	passportObserver.subscribe("hasErrors", dialogMaster());
+	
+	passportObserver.subscribe("noErrors",	pointsDecorator);
+	passportObserver.subscribe("noErrors",	dialogMaster());
+
+	passportObserver.subscribe("pointsGrow", (e) => {
+		document.getElementById("points").classList.add("good");
+		document.getElementById("points").classList.remove("error");
+	});
+	passportObserver.subscribe("pointsRegress", (e) => {
+		document.getElementById("points").classList.add("error"); 
+		document.getElementById("points").classList.remove("good");
+	});
+	
+	passportObserver.subscribe("gotTarget", (e) => {
+		window.localStorage.setItem("points", e.target.points);
+		window.localStorage.setItem("passports", e.target.passports);	
+		message("", "УРРАААА!", data.messages.win, data.heroes.woman_happy, () => {
+			if(parent) {
+				try {
+					parent.document.querySelector("div[id*=coreSpr]").getCore( ).gotoNextSlide(parent.document.querySelector("div[id*=coreSpr]"));
+				} catch(e) {
+					alert('Не получается перейти на следующий слайд ' + e.name + ":" + e.message);
+				};
+			}
+			return true;
+		});
+	});
+	
+	
+	
+	passportGame.generate();
+	
+	message("", "ПРАВИЛА ИГРЫ", data.messages.rules, data.heroes.woman_ok)
+	
+	document.getElementById("next").addEventListener("click", (e) => {
+		passportGame.check();
+		if (passportGame.checked) {
+			passportGame.generate();
+			birthDayMask.clear();
+			rDateMask.clear();
+			numbermask.clear();
+		} 
+	});
+	
+	document.querySelector(".formTable").addEventListener("paste", (e) => {
+		e.preventDefault();
+		message("msgError", "СЕРЬЁЗНО? КОПИРУЕТЕ?", data.messages.ctrlv, data.heroes.man_surprised)
+	}, false);
+}
+
+loadData(data.load);
+
+ 
+
+</script>
+
+</body>
+</html>

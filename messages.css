@@ -1,0 +1,65 @@
+.msgMask {
+    position: 			fixed;
+    top: 				0px;
+    left: 				0px;
+    width: 				100%;
+    height: 			100%;
+    display: 			flex;
+    color: 				rgb(50, 50, 50);
+    text-align: 		center;
+    background-color: 	rgb(0, 0, 0, 0.3);
+    border-radius: 		10px;
+    font-size:			20px;
+    z-index:			2;
+}
+
+.msg {
+    border: 			0px;
+    background-color:	rgb(226, 240, 217);
+    text-align: 		left;
+    margin: 			auto;
+    font-family:		calibri;
+    border-radius:		10px;
+    padding:			5px;
+    max-width:  		500px;
+    box-shadow:			0 0 10px rgb(50, 50, 50);
+}
+
+
+.msgError {
+	    background-color:	rgb(255, 200, 200) !important;
+}
+
+.msgCaption {
+		vertical-align:		top;
+		font-weight:  		bold;
+		height:				50px;
+		padding-left:  		10px;
+}
+
+.msgBody {
+	padding: 			30px 10px 0px 10px;
+	vertical-align:		top;
+}
+
+.msgImg {
+	height:  			400px;
+}
+
+.rect {
+    width:				30px;
+    height:				30px;
+    text-align:			right;
+    vertical-align:		middle;
+    display:			table-cell;
+    background-color:	maroon;
+    border-radius:		100px;
+    font-family:		monospace;
+    box-shadow:			0 0 10px rgb(50, 50, 50);
+}
+
+
+
+body {
+    color: 				red;
+}
